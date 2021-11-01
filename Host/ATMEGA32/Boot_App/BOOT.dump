@@ -1,0 +1,478 @@
+
+BOOT.elf:     file format elf32-avr
+
+SYMBOL TABLE:
+00007000 l    d  .text	00000000 .text
+00000060 l    d  .data	00000000 .data
+00000162 l    d  .bss	00000000 .bss
+00000000 l    df *ABS*	00000000 BOOT_STARTUP.c
+0000003f l       *ABS*	00000000 __SREG__
+0000003e l       *ABS*	00000000 __SP_H__
+0000003d l       *ABS*	00000000 __SP_L__
+00000034 l       *ABS*	00000000 __CCP__
+00000000 l       *ABS*	00000000 __tmp_reg__
+00000001 l       *ABS*	00000000 __zero_reg__
+00000000 l    df *ABS*	00000000 BOOT_MAIN.c
+0000003f l       *ABS*	00000000 __SREG__
+0000003e l       *ABS*	00000000 __SP_H__
+0000003d l       *ABS*	00000000 __SP_L__
+00000034 l       *ABS*	00000000 __CCP__
+00000000 l       *ABS*	00000000 __tmp_reg__
+00000001 l       *ABS*	00000000 __zero_reg__
+00000163 l     O .bss	00000001 _NoOfPages
+00000164 l     O .bss	00000001 _currPage
+00000162 l     O .bss	00000001 _flashState
+00000000 l    df *ABS*	00000000 BOOT_SPI.c
+0000003f l       *ABS*	00000000 __SREG__
+0000003e l       *ABS*	00000000 __SP_H__
+0000003d l       *ABS*	00000000 __SP_L__
+00000034 l       *ABS*	00000000 __CCP__
+00000000 l       *ABS*	00000000 __tmp_reg__
+00000001 l       *ABS*	00000000 __zero_reg__
+00000000 l    df *ABS*	00000000 EEPROM.c
+0000003f l       *ABS*	00000000 __SREG__
+0000003e l       *ABS*	00000000 __SP_H__
+0000003d l       *ABS*	00000000 __SP_L__
+00000034 l       *ABS*	00000000 __CCP__
+00000000 l       *ABS*	00000000 __tmp_reg__
+00000001 l       *ABS*	00000000 __zero_reg__
+00000000 l    df *ABS*	00000000 FRAME_HANDLER.c
+0000003f l       *ABS*	00000000 __SREG__
+0000003e l       *ABS*	00000000 __SP_H__
+0000003d l       *ABS*	00000000 __SP_L__
+00000034 l       *ABS*	00000000 __CCP__
+00000000 l       *ABS*	00000000 __tmp_reg__
+00000001 l       *ABS*	00000000 __zero_reg__
+00007118 g     F .text	00000046 TxDataHandler
+0000727a  w    F .text	00000018 USART_RXC
+00007226 g     F .text	00000054 RESET
+000071a0 g     F .text	00000042 FrameHandlerInit
+0000727a  w    F .text	00000018 SPM_RDY
+0000727a  w    F .text	00000018 EXT_INT1
+0000727a  w    F .text	00000018 TIM1_CAPT
+00007318 g       .text	00000000 _etext
+00000162 g       .bss	00000000 _sbss
+00007054 g     F .text	0000002c FlashReqHandler
+00000060 g     O .data	00000001 ReqDataLen
+0000727a  w    F .text	00000018 TIM1_COMPB
+0000727a  w    F .text	00000018 TIM2_OVF
+0000727a  w    F .text	00000018 TIM0_COMP
+00000060 g       .data	00000000 _sdata
+0000715e g     F .text	00000018 CheckAppReq
+0000727a  w    F .text	00000018 SPI_STC
+00000165 g       .bss	00000000 _ebss
+000071e2 g     F .text	00000024 BOOT_MAIN
+000072a8 g     F .text	0000001a EEPROM_Update_Byte
+0000727a  w    F .text	00000018 ANA_COMP
+0000727a  w    F .text	00000018 TIM1_COMPA
+0000727a  w    F .text	00000018 EXT_INT2
+00000000         *UND*	00000000 __do_clear_bss
+00007000 g     F .text	00000054 BOOT_IVT
+0000727a g     F .text	00000018 Default_Handler
+0000727a  w    F .text	00000018 TIM0_OVF
+000072c2 g     F .text	00000050 ReceiveFrame
+0000727a  w    F .text	00000018 ADC_INT
+0000727a  w    F .text	00000018 TIM1_OVF
+00007206 g     F .text	00000016 SPIInitSlave
+0000727a  w    F .text	00000018 TIM2_COMP
+0000727a  w    F .text	00000018 EE_RDY
+00000061 g     O .data	00000001 reqResp
+00000062 g     O .data	00000100 RxBuffer
+00007312 g     F .text	00000006 FrameInit
+0000727a  w    F .text	00000018 EXT_INT0
+00007292 g     F .text	00000016 EEPROM_Read_Byte
+0000727a  w    F .text	00000018 USART_TXC
+00000162 g       .data	00000000 _edata
+0000727a  w    F .text	00000018 USART_UDRE
+0000721c g     F .text	0000000a SPITxRxByte
+0000727a  w    F .text	00000018 TWI
+00007176 g     F .text	0000002a CRCCheckHandler
+00007080 g     F .text	00000098 FlashingApp
+
+
+
+Disassembly of section .text:
+
+00007000 <BOOT_IVT>:
+    7000:	0c 94 13 39 	jmp	0x7226	; 0x7226 <RESET>
+    7004:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7008:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    700c:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7010:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7014:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7018:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    701c:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7020:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7024:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7028:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    702c:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7030:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7034:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7038:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    703c:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7040:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7044:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7048:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    704c:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+    7050:	0c 94 3d 39 	jmp	0x727a	; 0x727a <Default_Handler>
+
+00007054 <FlashReqHandler>:
+    7054:	fc 01       	movw	r30, r24
+    7056:	80 81       	ld	r24, Z
+    7058:	80 93 63 01 	sts	0x0163, r24
+    705c:	10 92 64 01 	sts	0x0164, r1
+    7060:	80 91 62 01 	lds	r24, 0x0162
+    7064:	81 30       	cpi	r24, 0x01	; 1
+    7066:	29 f4       	brne	.+10     	; 0x7072 <FlashReqHandler+0x1e>
+    7068:	83 e0       	ldi	r24, 0x03	; 3
+    706a:	80 93 61 00 	sts	0x0061, r24
+    706e:	82 e0       	ldi	r24, 0x02	; 2
+    7070:	04 c0       	rjmp	.+8      	; 0x707a <FlashReqHandler+0x26>
+    7072:	84 e0       	ldi	r24, 0x04	; 4
+    7074:	80 93 61 00 	sts	0x0061, r24
+    7078:	81 e0       	ldi	r24, 0x01	; 1
+    707a:	80 93 62 01 	sts	0x0162, r24
+    707e:	08 95       	ret
+
+00007080 <FlashingApp>:
+    7080:	0f 93       	push	r16
+    7082:	1f 93       	push	r17
+    7084:	db 01       	movw	r26, r22
+    7086:	9b b3       	in	r25, 0x1b	; 27
+    7088:	90 58       	subi	r25, 0x80	; 128
+    708a:	9b bb       	out	0x1b, r25	; 27
+    708c:	0f b7       	in	r16, 0x3f	; 63
+    708e:	f8 94       	cli
+    7090:	48 2f       	mov	r20, r24
+    7092:	50 e0       	ldi	r21, 0x00	; 0
+    7094:	56 95       	lsr	r21
+    7096:	54 2f       	mov	r21, r20
+    7098:	44 27       	eor	r20, r20
+    709a:	57 95       	ror	r21
+    709c:	47 95       	ror	r20
+    709e:	07 b6       	in	r0, 0x37	; 55
+    70a0:	00 fc       	sbrc	r0, 0
+    70a2:	fd cf       	rjmp	.-6      	; 0x709e <FlashingApp+0x1e>
+    70a4:	e1 99       	sbic	0x1c, 1	; 28
+    70a6:	fe cf       	rjmp	.-4      	; 0x70a4 <FlashingApp+0x24>
+    70a8:	83 e0       	ldi	r24, 0x03	; 3
+    70aa:	fa 01       	movw	r30, r20
+    70ac:	80 93 57 00 	sts	0x0057, r24
+    70b0:	e8 95       	spm
+    70b2:	60 e0       	ldi	r22, 0x00	; 0
+    70b4:	11 e0       	ldi	r17, 0x01	; 1
+    70b6:	8c 91       	ld	r24, X
+    70b8:	11 96       	adiw	r26, 0x01	; 1
+    70ba:	7c 91       	ld	r23, X
+    70bc:	11 97       	sbiw	r26, 0x01	; 1
+    70be:	07 b6       	in	r0, 0x37	; 55
+    70c0:	00 fc       	sbrc	r0, 0
+    70c2:	fd cf       	rjmp	.-6      	; 0x70be <FlashingApp+0x3e>
+    70c4:	e1 99       	sbic	0x1c, 1	; 28
+    70c6:	fe cf       	rjmp	.-4      	; 0x70c4 <FlashingApp+0x44>
+    70c8:	12 96       	adiw	r26, 0x02	; 2
+    70ca:	90 e0       	ldi	r25, 0x00	; 0
+    70cc:	fa 01       	movw	r30, r20
+    70ce:	e6 0f       	add	r30, r22
+    70d0:	f1 1d       	adc	r31, r1
+    70d2:	37 2f       	mov	r19, r23
+    70d4:	20 e0       	ldi	r18, 0x00	; 0
+    70d6:	82 2b       	or	r24, r18
+    70d8:	93 2b       	or	r25, r19
+    70da:	0c 01       	movw	r0, r24
+    70dc:	10 93 57 00 	sts	0x0057, r17
+    70e0:	e8 95       	spm
+    70e2:	11 24       	eor	r1, r1
+    70e4:	6e 5f       	subi	r22, 0xFE	; 254
+    70e6:	60 38       	cpi	r22, 0x80	; 128
+    70e8:	31 f7       	brne	.-52     	; 0x70b6 <FlashingApp+0x36>
+    70ea:	07 b6       	in	r0, 0x37	; 55
+    70ec:	00 fc       	sbrc	r0, 0
+    70ee:	fd cf       	rjmp	.-6      	; 0x70ea <FlashingApp+0x6a>
+    70f0:	e1 99       	sbic	0x1c, 1	; 28
+    70f2:	fe cf       	rjmp	.-4      	; 0x70f0 <FlashingApp+0x70>
+    70f4:	85 e0       	ldi	r24, 0x05	; 5
+    70f6:	fa 01       	movw	r30, r20
+    70f8:	80 93 57 00 	sts	0x0057, r24
+    70fc:	e8 95       	spm
+    70fe:	07 b6       	in	r0, 0x37	; 55
+    7100:	00 fc       	sbrc	r0, 0
+    7102:	fd cf       	rjmp	.-6      	; 0x70fe <FlashingApp+0x7e>
+    7104:	e1 99       	sbic	0x1c, 1	; 28
+    7106:	fe cf       	rjmp	.-4      	; 0x7104 <FlashingApp+0x84>
+    7108:	81 e1       	ldi	r24, 0x11	; 17
+    710a:	80 93 57 00 	sts	0x0057, r24
+    710e:	e8 95       	spm
+    7110:	0f bf       	out	0x3f, r16	; 63
+    7112:	1f 91       	pop	r17
+    7114:	0f 91       	pop	r16
+    7116:	08 95       	ret
+
+00007118 <TxDataHandler>:
+    7118:	1f 93       	push	r17
+    711a:	bc 01       	movw	r22, r24
+    711c:	80 91 62 01 	lds	r24, 0x0162
+    7120:	82 30       	cpi	r24, 0x02	; 2
+    7122:	a9 f4       	brne	.+42     	; 0x714e <TxDataHandler+0x36>
+    7124:	85 e0       	ldi	r24, 0x05	; 5
+    7126:	80 93 61 00 	sts	0x0061, r24
+    712a:	10 91 64 01 	lds	r17, 0x0164
+    712e:	6f 5f       	subi	r22, 0xFF	; 255
+    7130:	7f 4f       	sbci	r23, 0xFF	; 255
+    7132:	81 2f       	mov	r24, r17
+    7134:	0e 94 40 38 	call	0x7080	; 0x7080 <FlashingApp>
+    7138:	1f 5f       	subi	r17, 0xFF	; 255
+    713a:	10 93 64 01 	sts	0x0164, r17
+    713e:	80 91 63 01 	lds	r24, 0x0163
+    7142:	18 17       	cp	r17, r24
+    7144:	11 f0       	breq	.+4      	; 0x714a <TxDataHandler+0x32>
+    7146:	82 e0       	ldi	r24, 0x02	; 2
+    7148:	06 c0       	rjmp	.+12     	; 0x7156 <TxDataHandler+0x3e>
+    714a:	83 e0       	ldi	r24, 0x03	; 3
+    714c:	04 c0       	rjmp	.+8      	; 0x7156 <TxDataHandler+0x3e>
+    714e:	86 e0       	ldi	r24, 0x06	; 6
+    7150:	80 93 61 00 	sts	0x0061, r24
+    7154:	81 e0       	ldi	r24, 0x01	; 1
+    7156:	80 93 62 01 	sts	0x0162, r24
+    715a:	1f 91       	pop	r17
+    715c:	08 95       	ret
+
+0000715e <CheckAppReq>:
+    715e:	80 e0       	ldi	r24, 0x00	; 0
+    7160:	90 e0       	ldi	r25, 0x00	; 0
+    7162:	0e 94 49 39 	call	0x7292	; 0x7292 <EEPROM_Read_Byte>
+    7166:	84 9b       	sbis	0x10, 4	; 16
+    7168:	04 c0       	rjmp	.+8      	; 0x7172 <CheckAppReq+0x14>
+    716a:	85 30       	cpi	r24, 0x05	; 5
+    716c:	11 f4       	brne	.+4      	; 0x7172 <CheckAppReq+0x14>
+    716e:	0c 94 00 00 	jmp	0	; 0x0 <__tmp_reg__>
+    7172:	d8 9a       	sbi	0x1b, 0	; 27
+    7174:	08 95       	ret
+
+00007176 <CRCCheckHandler>:
+    7176:	80 91 62 01 	lds	r24, 0x0162
+    717a:	83 30       	cpi	r24, 0x03	; 3
+    717c:	51 f4       	brne	.+20     	; 0x7192 <CRCCheckHandler+0x1c>
+    717e:	87 e0       	ldi	r24, 0x07	; 7
+    7180:	80 93 61 00 	sts	0x0061, r24
+    7184:	80 e0       	ldi	r24, 0x00	; 0
+    7186:	90 e0       	ldi	r25, 0x00	; 0
+    7188:	65 e0       	ldi	r22, 0x05	; 5
+    718a:	0e 94 54 39 	call	0x72a8	; 0x72a8 <EEPROM_Update_Byte>
+    718e:	0c 94 00 00 	jmp	0	; 0x0 <__tmp_reg__>
+    7192:	88 e0       	ldi	r24, 0x08	; 8
+    7194:	80 93 61 00 	sts	0x0061, r24
+    7198:	81 e0       	ldi	r24, 0x01	; 1
+    719a:	80 93 62 01 	sts	0x0162, r24
+    719e:	08 95       	ret
+
+000071a0 <FrameHandlerInit>:
+    71a0:	80 91 62 00 	lds	r24, 0x0062
+    71a4:	82 30       	cpi	r24, 0x02	; 2
+    71a6:	51 f0       	breq	.+20     	; 0x71bc <FrameHandlerInit+0x1c>
+    71a8:	83 30       	cpi	r24, 0x03	; 3
+    71aa:	18 f4       	brcc	.+6      	; 0x71b2 <FrameHandlerInit+0x12>
+    71ac:	81 30       	cpi	r24, 0x01	; 1
+    71ae:	a9 f4       	brne	.+42     	; 0x71da <FrameHandlerInit+0x3a>
+    71b0:	15 c0       	rjmp	.+42     	; 0x71dc <FrameHandlerInit+0x3c>
+    71b2:	83 30       	cpi	r24, 0x03	; 3
+    71b4:	41 f0       	breq	.+16     	; 0x71c6 <FrameHandlerInit+0x26>
+    71b6:	84 30       	cpi	r24, 0x04	; 4
+    71b8:	81 f4       	brne	.+32     	; 0x71da <FrameHandlerInit+0x3a>
+    71ba:	0a c0       	rjmp	.+20     	; 0x71d0 <FrameHandlerInit+0x30>
+    71bc:	83 e6       	ldi	r24, 0x63	; 99
+    71be:	90 e0       	ldi	r25, 0x00	; 0
+    71c0:	0e 94 2a 38 	call	0x7054	; 0x7054 <FlashReqHandler>
+    71c4:	08 95       	ret
+    71c6:	83 e6       	ldi	r24, 0x63	; 99
+    71c8:	90 e0       	ldi	r25, 0x00	; 0
+    71ca:	0e 94 8c 38 	call	0x7118	; 0x7118 <TxDataHandler>
+    71ce:	08 95       	ret
+    71d0:	83 e6       	ldi	r24, 0x63	; 99
+    71d2:	90 e0       	ldi	r25, 0x00	; 0
+    71d4:	0e 94 bb 38 	call	0x7176	; 0x7176 <CRCCheckHandler>
+    71d8:	08 95       	ret
+    71da:	82 e0       	ldi	r24, 0x02	; 2
+    71dc:	80 93 61 00 	sts	0x0061, r24
+    71e0:	08 95       	ret
+
+000071e2 <BOOT_MAIN>:
+    71e2:	8c 98       	cbi	0x11, 4	; 17
+    71e4:	94 9a       	sbi	0x12, 4	; 18
+    71e6:	8f ef       	ldi	r24, 0xFF	; 255
+    71e8:	8a bb       	out	0x1a, r24	; 26
+    71ea:	0e 94 af 38 	call	0x715e	; 0x715e <CheckAppReq>
+    71ee:	0e 94 89 39 	call	0x7312	; 0x7312 <FrameInit>
+    71f2:	81 e0       	ldi	r24, 0x01	; 1
+    71f4:	80 93 62 01 	sts	0x0162, r24
+    71f8:	80 93 61 00 	sts	0x0061, r24
+    71fc:	0e 94 61 39 	call	0x72c2	; 0x72c2 <ReceiveFrame>
+    7200:	0e 94 d0 38 	call	0x71a0	; 0x71a0 <FrameHandlerInit>
+    7204:	fb cf       	rjmp	.-10     	; 0x71fc <BOOT_MAIN+0x1a>
+
+00007206 <SPIInitSlave>:
+    7206:	87 b3       	in	r24, 0x17	; 23
+    7208:	8f 74       	andi	r24, 0x4F	; 79
+    720a:	87 bb       	out	0x17, r24	; 23
+    720c:	be 9a       	sbi	0x17, 6	; 23
+    720e:	8d b1       	in	r24, 0x0d	; 13
+    7210:	84 76       	andi	r24, 0x64	; 100
+    7212:	8d b9       	out	0x0d, r24	; 13
+    7214:	8d b1       	in	r24, 0x0d	; 13
+    7216:	84 66       	ori	r24, 0x64	; 100
+    7218:	8d b9       	out	0x0d, r24	; 13
+    721a:	08 95       	ret
+
+0000721c <SPITxRxByte>:
+    721c:	8f b9       	out	0x0f, r24	; 15
+    721e:	77 9b       	sbis	0x0e, 7	; 14
+    7220:	fe cf       	rjmp	.-4      	; 0x721e <SPITxRxByte+0x2>
+    7222:	8f b1       	in	r24, 0x0f	; 15
+    7224:	08 95       	ret
+
+00007226 <RESET>:
+    7226:	8f e5       	ldi	r24, 0x5F	; 95
+    7228:	98 e0       	ldi	r25, 0x08	; 8
+    722a:	9e bf       	out	0x3e, r25	; 62
+    722c:	8d bf       	out	0x3d, r24	; 61
+    722e:	42 e6       	ldi	r20, 0x62	; 98
+    7230:	51 e0       	ldi	r21, 0x01	; 1
+    7232:	40 56       	subi	r20, 0x60	; 96
+    7234:	50 40       	sbci	r21, 0x00	; 0
+    7236:	a0 e6       	ldi	r26, 0x60	; 96
+    7238:	b0 e0       	ldi	r27, 0x00	; 0
+    723a:	e8 e1       	ldi	r30, 0x18	; 24
+    723c:	f3 e7       	ldi	r31, 0x73	; 115
+    723e:	20 e0       	ldi	r18, 0x00	; 0
+    7240:	30 e0       	ldi	r19, 0x00	; 0
+    7242:	04 c0       	rjmp	.+8      	; 0x724c <RESET+0x26>
+    7244:	81 91       	ld	r24, Z+
+    7246:	8d 93       	st	X+, r24
+    7248:	2f 5f       	subi	r18, 0xFF	; 255
+    724a:	3f 4f       	sbci	r19, 0xFF	; 255
+    724c:	24 17       	cp	r18, r20
+    724e:	35 07       	cpc	r19, r21
+    7250:	c8 f3       	brcs	.-14     	; 0x7244 <RESET+0x1e>
+    7252:	25 e6       	ldi	r18, 0x65	; 101
+    7254:	31 e0       	ldi	r19, 0x01	; 1
+    7256:	22 56       	subi	r18, 0x62	; 98
+    7258:	31 40       	sbci	r19, 0x01	; 1
+    725a:	e2 e6       	ldi	r30, 0x62	; 98
+    725c:	f1 e0       	ldi	r31, 0x01	; 1
+    725e:	80 e0       	ldi	r24, 0x00	; 0
+    7260:	90 e0       	ldi	r25, 0x00	; 0
+    7262:	02 c0       	rjmp	.+4      	; 0x7268 <RESET+0x42>
+    7264:	11 92       	st	Z+, r1
+    7266:	01 96       	adiw	r24, 0x01	; 1
+    7268:	82 17       	cp	r24, r18
+    726a:	93 07       	cpc	r25, r19
+    726c:	d8 f3       	brcs	.-10     	; 0x7264 <RESET+0x3e>
+    726e:	8f e5       	ldi	r24, 0x5F	; 95
+    7270:	98 e0       	ldi	r25, 0x08	; 8
+    7272:	9e bf       	out	0x3e, r25	; 62
+    7274:	8d bf       	out	0x3d, r24	; 61
+    7276:	0c 94 f1 38 	jmp	0x71e2	; 0x71e2 <BOOT_MAIN>
+
+0000727a <Default_Handler>:
+    727a:	78 94       	sei
+    727c:	1f 92       	push	r1
+    727e:	0f 92       	push	r0
+    7280:	0f b6       	in	r0, 0x3f	; 63
+    7282:	0f 92       	push	r0
+    7284:	11 24       	eor	r1, r1
+    7286:	18 95       	reti
+    7288:	0f 90       	pop	r0
+    728a:	0f be       	out	0x3f, r0	; 63
+    728c:	0f 90       	pop	r0
+    728e:	1f 90       	pop	r1
+    7290:	18 95       	reti
+
+00007292 <EEPROM_Read_Byte>:
+    7292:	9c 01       	movw	r18, r24
+    7294:	e1 99       	sbic	0x1c, 1	; 28
+    7296:	fe cf       	rjmp	.-4      	; 0x7294 <EEPROM_Read_Byte+0x2>
+    7298:	3f bb       	out	0x1f, r19	; 31
+    729a:	2e bb       	out	0x1e, r18	; 30
+    729c:	8f b7       	in	r24, 0x3f	; 63
+    729e:	f8 94       	cli
+    72a0:	e0 9a       	sbi	0x1c, 0	; 28
+    72a2:	8f bf       	out	0x3f, r24	; 63
+    72a4:	8d b3       	in	r24, 0x1d	; 29
+    72a6:	08 95       	ret
+
+000072a8 <EEPROM_Update_Byte>:
+    72a8:	9c 01       	movw	r18, r24
+    72aa:	e1 99       	sbic	0x1c, 1	; 28
+    72ac:	fe cf       	rjmp	.-4      	; 0x72aa <EEPROM_Update_Byte+0x2>
+    72ae:	3f bb       	out	0x1f, r19	; 31
+    72b0:	2e bb       	out	0x1e, r18	; 30
+    72b2:	6d bb       	out	0x1d, r22	; 29
+    72b4:	8f b7       	in	r24, 0x3f	; 63
+    72b6:	f8 94       	cli
+    72b8:	e1 98       	cbi	0x1c, 1	; 28
+    72ba:	e2 9a       	sbi	0x1c, 2	; 28
+    72bc:	e1 9a       	sbi	0x1c, 1	; 28
+    72be:	8f bf       	out	0x3f, r24	; 63
+    72c0:	08 95       	ret
+
+000072c2 <ReceiveFrame>:
+    72c2:	0f 93       	push	r16
+    72c4:	1f 93       	push	r17
+    72c6:	df 93       	push	r29
+    72c8:	cf 93       	push	r28
+    72ca:	0f 92       	push	r0
+    72cc:	cd b7       	in	r28, 0x3d	; 61
+    72ce:	de b7       	in	r29, 0x3e	; 62
+    72d0:	80 e0       	ldi	r24, 0x00	; 0
+    72d2:	0e 94 0e 39 	call	0x721c	; 0x721c <SPITxRxByte>
+    72d6:	80 93 60 00 	sts	0x0060, r24
+    72da:	90 e0       	ldi	r25, 0x00	; 0
+    72dc:	0c c0       	rjmp	.+24     	; 0x72f6 <ReceiveFrame+0x34>
+    72de:	09 2f       	mov	r16, r25
+    72e0:	10 e0       	ldi	r17, 0x00	; 0
+    72e2:	9f 5f       	subi	r25, 0xFF	; 255
+    72e4:	89 2f       	mov	r24, r25
+    72e6:	99 83       	std	Y+1, r25	; 0x01
+    72e8:	0e 94 0e 39 	call	0x721c	; 0x721c <SPITxRxByte>
+    72ec:	0e 59       	subi	r16, 0x9E	; 158
+    72ee:	1f 4f       	sbci	r17, 0xFF	; 255
+    72f0:	f8 01       	movw	r30, r16
+    72f2:	80 83       	st	Z, r24
+    72f4:	99 81       	ldd	r25, Y+1	; 0x01
+    72f6:	80 91 60 00 	lds	r24, 0x0060
+    72fa:	98 17       	cp	r25, r24
+    72fc:	80 f3       	brcs	.-32     	; 0x72de <ReceiveFrame+0x1c>
+    72fe:	80 91 61 00 	lds	r24, 0x0061
+    7302:	0e 94 0e 39 	call	0x721c	; 0x721c <SPITxRxByte>
+    7306:	0f 90       	pop	r0
+    7308:	cf 91       	pop	r28
+    730a:	df 91       	pop	r29
+    730c:	1f 91       	pop	r17
+    730e:	0f 91       	pop	r16
+    7310:	08 95       	ret
+
+00007312 <FrameInit>:
+    7312:	0e 94 03 39 	call	0x7206	; 0x7206 <SPIInitSlave>
+    7316:	08 95       	ret
+
+Disassembly of section .data:
+
+00000060 <ReqDataLen>:
+	...
+
+00000061 <reqResp>:
+	...
+
+00000062 <RxBuffer>:
+	...
+
+Disassembly of section .bss:
+
+00000162 <_sbss>:
+	...
+
+00000163 <_NoOfPages>:
+	...
+
+00000164 <_currPage>:
+	...

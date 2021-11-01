@@ -1,0 +1,35 @@
+{
+  "C_Cpp_Runner.cCompilerPath": "C:\\MinGW\\bin\\gcc.exe",
+  "C_Cpp_Runner.cppCompilerPath": "C:\\MinGW\\bin\\g++.exe",
+  "C_Cpp_Runner.warnings": [
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic"
+  ],
+  "C_Cpp_Runner.compilerArgs": [],
+  "C_Cpp_Runner.includePaths": [
+    "C:\\WinAVR\\avr32\\include",
+    "C:\\WinAVR\\avr\\include"
+  ],
+  "C_Cpp_Runner.linkerArgs": [],
+  "C_Cpp_Runner.cStandard": "",
+  "C_Cpp_Runner.cppStandard": "",
+  "C_Cpp_Runner.excludeSearch": [],
+  "C_Cpp_Runner.enableWarnings": true,
+  "C_Cpp_Runner.warningsAsError": false,
+  "cmake.configureOnOpen": false,
+  "files.associations": {
+    "io.h": "c",
+    "macros.h": "c",
+    "io86r401.h": "c",
+    "boot.h": "c",
+    "eeprom.h": "c",
+    "interrupt.h": "c",
+    "boot_uart.h": "c",
+    "crc16.h": "c",
+    "delay.h": "c",
+    "common.h": "c",
+    "boot_macros.h": "c"
+  },
+  "C_Cpp.errorSquiggles": "Disabled"
+}

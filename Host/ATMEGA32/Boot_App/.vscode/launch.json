@@ -1,0 +1,52 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "AVR BOOT APP Build",
+      "request": "launch",
+      "type": "cppdbg",
+      "cwd": "e:\\AAA\\EmbeddedRepoProjects\\OTA Programmer\\Host\\ATMEGA32\\Boot_App",
+      "preLaunchTask": "build_for_objs_creation",
+      "miDebuggerPath": "C:\\WinAVR\\bin\\avr-objcopy.exe",
+      "miDebuggerArgs": "-O binary BOOT_APP.bin",
+      "program": "${workspaceFolder}/BOOT_APP.elf"
+    },
+    {
+      "name": "(gdb) Attach",
+      "type": "cppdbg",
+      "request": "attach",
+      "program": "enter program name, for example ${workspaceFolder}/a.exe",
+      "processId": "${command:pickProcess}",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/path/to/gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "e:\\AAA\\EmbeddedRepoProjects\\OTA Programmer\\Host\\ATMEGA32\\Boot_App",
+      "environment": [],
+      "program": "e:\\AAA\\EmbeddedRepoProjects\\OTA Programmer\\Host\\ATMEGA32\\Boot_App\\build\\Debug\\outDebug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "externalConsole": false,
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}

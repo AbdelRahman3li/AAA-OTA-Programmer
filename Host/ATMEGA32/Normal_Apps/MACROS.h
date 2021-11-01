@@ -1,0 +1,28 @@
+/**
+ * @file MACROS.h
+ * @author AbdelRahman Ali
+ * @brief Macros for handling bits.
+ * @version 0.1
+ * @date 2021-10-18
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
+
+#ifndef MACROS_H_
+#define MACROS_H_
+
+#include <avr/common.h>
+
+#define NULL ((void*)0)
+
+#define SET_BIT(DATA, BIT)          ((DATA) |= (1<<BIT))
+#define CLR_BIT(DATA, BIT)          ((DATA) &= ~(1<<BIT))
+#define TOGGLE_BIT(DATA, BIT)       ((DATA) ^= (1<<BIT))
+#define GET_BIT(DATA, BIT)          (((Data)>>(Bit)) & 1)
+
+
+#define APP_ISR(vect)	void vect(void) __attribute__ ((interrupt));	\
+						void vect(void)
+
+#endif /* MACROS_H_ */

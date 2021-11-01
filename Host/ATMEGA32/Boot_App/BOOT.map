@@ -1,0 +1,99 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+ReqDataLen          0x1               ./FRAME_HANDLER.o
+reqResp             0x1               ./FRAME_HANDLER.o
+RxBuffer            0x100             ./FRAME_HANDLER.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+BOOT_FLASH       0x00007000         0x00001000         xr
+SRAM             0x00000060         0x00000800         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./BOOT_MAIN.o
+LOAD ./BOOT_SPI.o
+LOAD ./BOOT_STARTUP.o
+LOAD ./EEPROM.o
+LOAD ./FRAME_HANDLER.o
+
+.text           0x00007000      0x318
+ *(.boot_ivt)
+ .boot_ivt      0x00007000       0x54 ./BOOT_STARTUP.o
+                0x00007000                BOOT_IVT
+ *(.text)
+ .text          0x00007054      0x1b2 ./BOOT_MAIN.o
+                0x00007118                TxDataHandler
+                0x000071a0                FrameHandlerInit
+                0x00007054                FlashReqHandler
+                0x0000715e                CheckAppReq
+                0x000071e2                BOOT_MAIN
+                0x00007176                CRCCheckHandler
+                0x00007080                FlashingApp
+ .text          0x00007206       0x20 ./BOOT_SPI.o
+                0x00007206                SPIInitSlave
+                0x0000721c                SPITxRxByte
+ .text          0x00007226       0x6c ./BOOT_STARTUP.o
+                0x0000727a                USART_RXC
+                0x00007226                RESET
+                0x0000727a                SPM_RDY
+                0x0000727a                EXT_INT1
+                0x0000727a                TIM1_CAPT
+                0x0000727a                TIM1_COMPB
+                0x0000727a                TIM2_OVF
+                0x0000727a                TIM0_COMP
+                0x0000727a                SPI_STC
+                0x0000727a                ANA_COMP
+                0x0000727a                TIM1_COMPA
+                0x0000727a                EXT_INT2
+                0x0000727a                Default_Handler
+                0x0000727a                TIM0_OVF
+                0x0000727a                ADC_INT
+                0x0000727a                TIM1_OVF
+                0x0000727a                TIM2_COMP
+                0x0000727a                EE_RDY
+                0x0000727a                EXT_INT0
+                0x0000727a                USART_TXC
+                0x0000727a                USART_UDRE
+                0x0000727a                TWI
+ .text          0x00007292       0x30 ./EEPROM.o
+                0x000072a8                EEPROM_Update_Byte
+                0x00007292                EEPROM_Read_Byte
+ .text          0x000072c2       0x56 ./FRAME_HANDLER.o
+                0x000072c2                ReceiveFrame
+                0x00007312                FrameInit
+ *(.rodata)
+ *(.trampolines)
+ .trampolines   0x00007318        0x0 linker stubs
+                0x00007318                _etext = .
+
+.data           0x00000060      0x102 load address 0x00007318
+                0x00000060                _sdata = .
+ *(.data)
+ .data          0x00000060        0x0 ./BOOT_MAIN.o
+ .data          0x00000060        0x0 ./BOOT_SPI.o
+ .data          0x00000060        0x0 ./BOOT_STARTUP.o
+ .data          0x00000060        0x0 ./EEPROM.o
+ .data          0x00000060        0x0 ./FRAME_HANDLER.o
+ *(COMMON)
+ COMMON         0x00000060      0x102 ./FRAME_HANDLER.o
+                0x00000060                ReqDataLen
+                0x00000061                reqResp
+                0x00000062                RxBuffer
+                0x00000162                _edata = .
+
+.bss            0x00000162        0x3
+                0x00000162                _sbss = .
+ *(.bss)
+ .bss           0x00000162        0x3 ./BOOT_MAIN.o
+ .bss           0x00000165        0x0 ./BOOT_SPI.o
+ .bss           0x00000165        0x0 ./BOOT_STARTUP.o
+ .bss           0x00000165        0x0 ./EEPROM.o
+ .bss           0x00000165        0x0 ./FRAME_HANDLER.o
+                0x00000165                _ebss = .
+OUTPUT(BOOT.elf elf32-avr)
+LOAD linker stubs
