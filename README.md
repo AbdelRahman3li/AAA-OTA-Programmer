@@ -12,7 +12,7 @@
     1. How to write Make file.
     2. How to write Linker script.
     3. How to write Startup code.
-    4. How relocatable object file linked together.
+    4. How relocatable object files are linked together.
     5. The purpose of each section in the code file.
     6. Bare metal embedded systems programming using Visual studio code and gcc tools.
 
