@@ -22,7 +22,7 @@
         2.1- It begins at wait flash request state.
         2.2- If flash request frame received it enters to wait tx data state.
         2.3- after flashing all tx pages data it enters to wait crc check state
-        (Note: the login of this state isn't implemented yet).
+        (Note: the logic of this state isn't implemented yet).
         2.4- after crc check it jumps to flashed application.
 
 ### **The Frame and Its Construction**
